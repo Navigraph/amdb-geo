@@ -43,6 +43,12 @@ impl From<String> for RunwayId {
     }
 }
 
+impl ToString for RunwayId {
+    fn to_string(&self) -> String {
+        format!("{}.{}", self.0, self.1)
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 pub enum HoldingPointTarget {
     Taxiway(String),
@@ -76,6 +82,7 @@ pub struct RunwayElement {
     pub width: f64,
     pub length: f64,
     pub surface_type: SurfaceType,
+    pub geometry: Polygon,
 }
 
 implement!(RunwayElement);

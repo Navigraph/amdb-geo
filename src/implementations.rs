@@ -93,6 +93,7 @@ impl From<geo_json::Polygon<layers::RunwayElement>> for RunwayElement {
             width: element.properties.width,
             length: element.properties.length,
             surface_type: element.properties.surftype,
+            geometry: element.geometry.into(),
         }
     }
 }
