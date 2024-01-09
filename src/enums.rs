@@ -81,10 +81,7 @@ define_enum!(SurfaceType {
 
 define_enum!(Status { Closed, Open });
 
-define_enum!(Availability {
-    Unavailable,
-    Available
-});
+define_enum!(Availability { Unavailable, Available });
 
 define_enum!(LandingCategory {
     Npa,
@@ -95,11 +92,7 @@ define_enum!(LandingCategory {
     Cat3C
 });
 
-define_enum!(CatStop {
-    None,
-    Cat1,
-    Cat2Or3
-});
+define_enum!(CatStop { None, Cat1, Cat2Or3 });
 
 define_enum!(ThresholdType {
     Threshold,
@@ -121,11 +114,7 @@ define_enum!(LineColour {
     White
 });
 
-define_enum!(Style {
-    Solid,
-    Dashed,
-    Dotted
-});
+define_enum!(Style { Solid, Dashed, Dotted });
 
 define_enum!(Direction {
     Bidirectional,

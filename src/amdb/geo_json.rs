@@ -26,10 +26,7 @@ impl<'de> Deserialize<'de> for Coordinate {
     {
         // Lat and lon are reversed in the GeoJSON data
         let v: Vec<f64> = Deserialize::deserialize(deserializer)?;
-        Ok(Coordinate {
-            lat: v[1],
-            lon: v[0],
-        })
+        Ok(Coordinate { lat: v[1], lon: v[0] })
     }
 }
 
@@ -92,8 +89,7 @@ pub struct AirportMapData {
     #[serde(rename = "hotspot")]
     pub hotspot: FeatureCollection<Polygon<Hotspot>>,
     #[serde(rename = "landandholdshortoperationlocation")]
-    pub land_and_hold_short_operation_location:
-        FeatureCollection<LineString<LandAndHoldShortOperationLocation>>,
+    pub land_and_hold_short_operation_location: FeatureCollection<LineString<LandAndHoldShortOperationLocation>>,
     #[serde(rename = "paintedcenterline")]
     pub painted_centerline: FeatureCollection<LineString<PaintedCenterline>>,
     #[serde(rename = "parkingstandarea")]

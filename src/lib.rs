@@ -1,5 +1,3 @@
-use geo::Coord;
-
 use crate::amdb::geo_json::AirportMapData;
 
 mod amdb;
@@ -12,6 +10,7 @@ pub struct Airport {
     pub apron_elements: Vec<output_types::ApronElement>,
     pub painted_centerlines: Vec<output_types::PaintedCenterline>,
     pub parking_stand_areas: Vec<output_types::ParkingStandArea>,
+    pub parking_stand_locations: Vec<output_types::ParkingStandLocation>,
     pub runway_displaced_areas: Vec<output_types::RunwayDisplacedArea>,
     pub runway_elements: Vec<output_types::RunwayElement>,
     pub runway_exit_lines: Vec<output_types::RunwayExitLine>,
@@ -25,9 +24,7 @@ pub struct Airport {
     pub taxiway_shoulders: Vec<output_types::TaxiwayShoulder>,
 }
 
-fn map_vec<T, O: From<T>>(input: Vec<T>) -> Vec<O> {
-    input.into_iter().map(Into::into).collect()
-}
+fn map_vec<T, O: From<T>>(input: Vec<T>) -> Vec<O> { input.into_iter().map(Into::into).collect() }
 
 pub fn parse_airport(data: &str) -> Result<Airport, Box<dyn std::error::Error>> {
     let mut airport: AirportMapData = serde_json::from_str(data)?;
@@ -38,6 +35,7 @@ pub fn parse_airport(data: &str) -> Result<Airport, Box<dyn std::error::Error>> 
         runway_elements: map_vec(airport.runway_element.features),
         painted_centerlines: map_vec(airport.painted_centerline.features),
         parking_stand_areas: map_vec(airport.parking_stand_area.features),
+        parking_stand_locations: map_vec(airport.parking_stand_location.features),
         runway_displaced_areas: map_vec(airport.runway_displaced_area.features),
         runway_exit_lines: map_vec(airport.runway_exit_line.features),
         runway_markings: map_vec(airport.runway_marking.features),

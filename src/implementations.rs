@@ -6,23 +6,31 @@ use crate::{
         layers,
     },
     output_types::{
-        AerodromeReferencePoint, ApronElement, PaintedCenterline, ParkingStandArea,
-        RunwayDisplacedArea, RunwayElement, RunwayExitLine, RunwayMarking, RunwayShoulder,
-        RunwayThreshold, StandGuidanceLine, TaxiwayElement, TaxiwayGuidanceLine,
-        TaxiwayHoldingPosition, TaxiwayShoulder,
+        AerodromeReferencePoint,
+        ApronElement,
+        PaintedCenterline,
+        ParkingStandArea,
+        ParkingStandLocation,
+        RunwayDisplacedArea,
+        RunwayElement,
+        RunwayExitLine,
+        RunwayMarking,
+        RunwayShoulder,
+        RunwayThreshold,
+        StandGuidanceLine,
+        TaxiwayElement,
+        TaxiwayGuidanceLine,
+        TaxiwayHoldingPosition,
+        TaxiwayShoulder,
     },
 };
 
 impl Into<Coord> for Coordinate {
-    fn into(self) -> Coord {
-        Coord::from((self.lon, self.lat))
-    }
+    fn into(self) -> Coord { Coord::from((self.lon, self.lat)) }
 }
 
 impl Into<LineString> for geo_json::Geometry<Vec<Coordinate>> {
-    fn into(self) -> LineString {
-        LineString::from(self.coordinates.clone())
-    }
+    fn into(self) -> LineString { LineString::from(self.coordinates.clone()) }
 }
 
 impl Into<Polygon> for geo_json::Geometry<Vec<Vec<Coordinate>>> {
@@ -211,6 +219,20 @@ impl From<geo_json::Point<layers::AerodromeReferencePoint>> for AerodromeReferen
             iata_id: reference_point.properties.iata,
             airport_name: reference_point.properties.name,
             elevation: reference_point.properties.elev,
+            location: reference_point.geometry.coordinates.into(),
+        }
+    }
+}
+
+impl From<geo_json::Point<layers::ParkingStandLocation>> for ParkingStandLocation {
+    fn from(reference_point: geo_json::Point<layers::ParkingStandLocation>) -> Self {
+        Self {
+            id: reference_point.properties.id,
+            stand_id: reference_point.properties.idstd,
+            aircraft_types: reference_point
+                .properties
+                .acn
+                .map_or(vec![], |x| x.split(".").map(ToString::to_string).collect()),
             location: reference_point.geometry.coordinates.into(),
         }
     }

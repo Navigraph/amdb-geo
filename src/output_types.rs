@@ -1,8 +1,18 @@
 use geo::{Coord, LineString, Polygon};
 
 use crate::enums::{
-    Availability, Bridge, CatStop, Direction, GroundSurfaceType, LandingCategory, LineColour,
-    PapiVasi, Status, Style, SurfaceType, ThresholdType,
+    Availability,
+    Bridge,
+    CatStop,
+    Direction,
+    GroundSurfaceType,
+    LandingCategory,
+    LineColour,
+    PapiVasi,
+    Status,
+    Style,
+    SurfaceType,
+    ThresholdType,
 };
 
 trait AmdbElement {
@@ -10,23 +20,17 @@ trait AmdbElement {
 }
 
 macro_rules! implement {
-    ($type: ty) => {
+    ($type:ty) => {
         impl AmdbElement for $type {
-            fn id(&self) -> u64 {
-                self.id
-            }
+            fn id(&self) -> u64 { self.id }
         }
 
         impl std::hash::Hash for $type {
-            fn hash<H: std::hash::Hasher>(&self, state: &mut H) {
-                self.id.hash(state);
-            }
+            fn hash<H: std::hash::Hasher>(&self, state: &mut H) { self.id.hash(state); }
         }
         impl Eq for $type {}
         impl PartialEq for $type {
-            fn eq(&self, other: &$type) -> bool {
-                self.id == other.id
-            }
+            fn eq(&self, other: &$type) -> bool { self.id == other.id }
         }
     };
 }
@@ -44,9 +48,7 @@ impl From<String> for RunwayId {
 }
 
 impl ToString for RunwayId {
-    fn to_string(&self) -> String {
-        format!("{}.{}", self.0, self.1)
-    }
+    fn to_string(&self) -> String { format!("{}.{}", self.0, self.1) }
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
@@ -235,6 +237,16 @@ pub struct RunwayThreshold {
 }
 
 implement!(RunwayThreshold);
+
+#[derive(Debug, Clone)]
+pub struct ParkingStandLocation {
+    pub id: u64,
+    pub stand_id: Option<String>,
+    pub aircraft_types: Vec<String>,
+    pub location: Coord,
+}
+
+implement!(ParkingStandLocation);
 
 #[derive(Debug, Clone)]
 pub struct PaintedCenterline {
