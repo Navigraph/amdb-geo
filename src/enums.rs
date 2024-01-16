@@ -1,6 +1,7 @@
 use serde::{Deserialize, Deserializer};
 
-/// Defines an enum and automatically assigns a number to each variant of an enum, and creates an Unknown variant for values outside of the range.
+/// Defines an enum and automatically assigns a number to each variant of an enum, and creates an Unknown variant for
+/// values outside of the range.
 macro_rules! define_enum {
     ($name:ident { $($variant:ident),* }) => {
         #[derive(Debug, PartialEq, Eq, Copy, Clone)]
@@ -31,6 +32,7 @@ macro_rules! define_enum {
 }
 
 define_enum!(GroundSurfaceType {
+    FillerDontUse,
     Concrete,
     Asphalt,
     DesertOrSandOrDirt,
@@ -53,6 +55,7 @@ define_enum!(GroundSurfaceType {
 });
 
 define_enum!(SurfaceType {
+    FillerDontUse,
     ConcreteGrooved,
     ConcreteNoneGrooved,
     AsphaltGrooved,
@@ -129,6 +132,7 @@ define_enum!(Bridge {
 });
 
 define_enum!(LineStructureType {
+    FillerDontUse,
     PowerLine,
     CableRailway,
     BushesOrTrees,
@@ -136,6 +140,7 @@ define_enum!(LineStructureType {
 });
 
 define_enum!(PointStructureType {
+    FillerDontUse,
     Smokestack,
     PowerlinePylon,
     Antenna,
@@ -146,6 +151,7 @@ define_enum!(PointStructureType {
 });
 
 define_enum!(PolygonalStructureType {
+    FillerDontUse,
     TerminalBuilding,
     Hangar,
     ControlTower,
@@ -158,6 +164,7 @@ define_enum!(PolygonalStructureType {
 });
 
 define_enum!(Material {
+    FillerDontUse,
     Concrete,
     Metal,
     StoneOrBrick,
