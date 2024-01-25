@@ -117,7 +117,7 @@ pub struct RunwayElement {
 #[derive(Debug, Deserialize, PartialEq)]
 pub struct RunwayExitLine {
     pub id: u64,
-    pub idlin: String,
+    pub idlin: Option<String>,
     pub status: Status,
     pub direc: Direction,
     pub color: LineColour,

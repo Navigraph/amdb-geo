@@ -182,7 +182,7 @@ impl From<geo_json::LineString<layers::RunwayExitLine>> for RunwayExitLine {
             direction: exit_line.properties.direc,
             style: exit_line.properties.style,
             status: exit_line.properties.status,
-            taxiway_id: exit_line.properties.idlin,
+            taxiway_id: normalize_string(exit_line.properties.idlin),
             geometry: exit_line.geometry.into(),
         }
     }

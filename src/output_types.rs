@@ -190,7 +190,7 @@ pub struct RunwayExitLine {
     pub direction: Direction,
     pub style: Style,
     pub status: Status,
-    pub taxiway_id: String,
+    pub taxiway_id: Option<String>,
     pub geometry: LineString,
 }
 
